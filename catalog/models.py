@@ -1,3 +1,38 @@
-# from django.db import models
+from django.db import models
 
-# Create your models here.
+class Product(models.Model):
+    """Класс информации о товарах"""
+    name = models.CharField(max_length=100, verbose_name='наименование товара', help_text='Введите наименование товара')
+    description = models.TextField(verbose_name='описание товара', blank=True, null=True)
+    image = models.ImageField(upload_to='product/image/', verbose_name='изображение товара', blank=True, null=True)
+    category = models.ForeignKey(to='Category', on_delete=models.SET_NULL ,verbose_name='категория товара', help_text='Введите категорию товара', null=True, related_name='product')
+    price = models.FloatField(verbose_name='цена товара', blank=True, null=True)
+    created_at = models.DateField(auto_now_add=True, verbose_name='дата создания товара', blank=True, null=True)
+    updated_at = models.DateField(auto_now=True, verbose_name='дата последнего изменения товара', blank=True, null=True)
+
+    def __str__(self) -> str:
+        """Магический метод, возвращающий название товара"""
+        return self.name
+
+    class Meta:
+        """Метакласс для класса товаров"""
+        verbose_name = 'товар'
+        verbose_name_plural = 'товары'
+        ordering = ['name']
+        db_table = 'products'
+
+    class Category(models.Model):
+        """Класс информации о категориях товаров"""
+        name = models.CharField(max_length=100, verbose_name='наименование категории товара',
+                                help_text='Введите наименование категории товара')
+        description = models.TextField(verbose_name='описание категории товара', blank=True, null=True)
+
+        def __str__(self) -> str:
+            """Магический метод, возвращающий название категории товара"""
+            return self.name
+
+        class Meta:
+            """Метакласс для класса категорий товаров"""
+            verbose_name = 'категория'
+            verbose_name_plural = 'категории'
+            db_table = 'category'
