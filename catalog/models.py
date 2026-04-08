@@ -18,21 +18,22 @@ class Product(models.Model):
         """Метакласс для класса товаров"""
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
-        ordering = ['name']
+        ordering = ['id']
         db_table = 'products'
 
-    class Category(models.Model):
-        """Класс информации о категориях товаров"""
-        name = models.CharField(max_length=100, verbose_name='наименование категории товара',
-                                help_text='Введите наименование категории товара')
-        description = models.TextField(verbose_name='описание категории товара', blank=True, null=True)
+class Category(models.Model):
+    """Класс информации о категориях товаров"""
+    name = models.CharField(max_length=100, verbose_name='наименование категории товара',
+                            help_text='Введите наименование категории товара')
+    description = models.TextField(verbose_name='описание категории товара', blank=True, null=True)
 
-        def __str__(self) -> str:
-            """Магический метод, возвращающий название категории товара"""
-            return self.name
+    def __str__(self) -> str:
+        """Магический метод, возвращающий название категории товара"""
+        return self.name
 
-        class Meta:
-            """Метакласс для класса категорий товаров"""
-            verbose_name = 'категория'
-            verbose_name_plural = 'категории'
-            db_table = 'category'
+    class Meta:
+        """Метакласс для класса категорий товаров"""
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
+        ordering = ['id']
+        db_table = 'category'
