@@ -1,12 +1,14 @@
 from django.db import models
 
+
 class Product(models.Model):
     """Класс информации о товарах"""
     name = models.CharField(max_length=100, verbose_name='наименование товара', help_text='Введите наименование товара')
     description = models.TextField(verbose_name='описание товара', blank=True, null=True)
     image = models.ImageField(upload_to='product/image/', verbose_name='изображение товара', blank=True, null=True)
-    category = models.ForeignKey(to='Category', on_delete=models.SET_NULL ,verbose_name='категория товара', help_text='Введите категорию товара', null=True, related_name='product')
-    price = models.FloatField(verbose_name='цена товара', blank=True, null=True)
+    category = models.ForeignKey(to='Category', on_delete=models.SET_NULL, verbose_name='категория товара',
+                                 help_text='Введите категорию товара', null=True, related_name='product')
+    price = models.DecimalField(verbose_name='цена товара', blank=True, null=True, max_digits=20, decimal_places=2)
     created_at = models.DateField(auto_now_add=True, verbose_name='дата создания товара', blank=True, null=True)
     updated_at = models.DateField(auto_now=True, verbose_name='дата последнего изменения товара', blank=True, null=True)
 
