@@ -118,5 +118,32 @@
         "name": "мебель",
         "description": "для домашнего уюта"
     }
+},
+{
+    "model": "catalog.contact",
+    "pk": 1,
+    "fields": {
+        "name": "firstCo",
+        "email": "first@ya.ru",
+        "number": "8-999-999-99-99"
+    }
+},
+{
+    "model": "catalog.contact",
+    "pk": 2,
+    "fields": {
+        "name": "secondCo",
+        "email": "second@ya.ru",
+        "number": "8-999-888-88-88"
+    }
+},
+{
+    "model": "catalog.contact",
+    "pk": 3,
+    "fields": {
+        "name": "thirdCo",
+        "email": "third@ya.ru",
+        "number": "8-999-777-77-77"
+    }
 }
 ]
