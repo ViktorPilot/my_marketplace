@@ -1,0 +1,149 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "ноутбук",
+        "description": "для работы в сети",
+        "image": "",
+        "category": 1,
+        "price": "1000.00",
+        "created_at": "2026-04-08",
+        "updated_at": "2026-04-08"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "телевизор",
+        "description": "для просмотра эфира",
+        "image": "",
+        "category": 1,
+        "price": "400.00",
+        "created_at": "2026-04-08",
+        "updated_at": "2026-04-08"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "шкаф",
+        "description": "для хранения вещей",
+        "image": "",
+        "category": 2,
+        "price": "200.00",
+        "created_at": "2026-04-08",
+        "updated_at": "2026-04-08"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "диван",
+        "description": "для отдыха",
+        "image": "",
+        "category": 2,
+        "price": "300.00",
+        "created_at": "2026-04-08",
+        "updated_at": "2026-04-08"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "name": "магнитофон",
+        "description": "для прослушивания музыки",
+        "image": "",
+        "category": 1,
+        "price": "50.00",
+        "created_at": "2026-04-09",
+        "updated_at": "2026-04-09"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "name": "холодильник",
+        "description": "для хранения продуктов",
+        "image": "",
+        "category": 1,
+        "price": "150.00",
+        "created_at": "2026-04-09",
+        "updated_at": "2026-04-09"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+        "name": "стиральная машина",
+        "description": "для стирки белья",
+        "image": "",
+        "category": 1,
+        "price": "200.00",
+        "created_at": "2026-04-09",
+        "updated_at": "2026-04-09"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+        "name": "планшет",
+        "description": "для работы",
+        "image": "",
+        "category": 1,
+        "price": "50.00",
+        "created_at": "2026-04-09",
+        "updated_at": "2026-04-09"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "электроника",
+        "description": "для пользования электронными устройствами"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "мебель",
+        "description": "для домашнего уюта"
+    }
+},
+{
+    "model": "catalog.contact",
+    "pk": 1,
+    "fields": {
+        "name": "firstCo",
+        "email": "first@ya.ru",
+        "number": "8-999-999-99-99"
+    }
+},
+{
+    "model": "catalog.contact",
+    "pk": 2,
+    "fields": {
+        "name": "secondCo",
+        "email": "second@ya.ru",
+        "number": "8-999-888-88-88"
+    }
+},
+{
+    "model": "catalog.contact",
+    "pk": 3,
+    "fields": {
+        "name": "thirdCo",
+        "email": "third@ya.ru",
+        "number": "8-999-777-77-77"
+    }
+}
+]

@@ -26,16 +26,22 @@
                 <div class="card-body">
                     <table class="table table-striped">
                         <tr>
-                            <td class="w-25">Страна</td>
-                            <td>USA</td>
+                            <td class="w-25">Название компании</td>
+                                {% for name in names %}
+                                <td>{{ name }}</td>
+                                {% endfor %}
                         </tr>
                         <tr>
-                            <td class="w-25">ИНН</td>
-                            <td>91-1144442</td>
+                            <td class="w-25">Почта</td>
+                                {% for email in emails %}
+                                <td>{{ email }}</td>
+                                {% endfor %}
                         </tr>
                         <tr>
-                            <td class="w-25">Адрес</td>
-                            <td>Redmond,WA,98052-6399</td>
+                            <td class="w-25">Телефон</td>
+                                {% for number in numbers %}
+                                <td>{{ number }}</td>
+                                {% endfor %}
                         </tr>
                     </table>
                 </div>
