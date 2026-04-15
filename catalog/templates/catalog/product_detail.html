@@ -13,6 +13,9 @@
     <div class="row g-0">
         <div class="col-md-4">
             <img src="{{ product.image | media_filter }}" class="card-img-top" alt="Изображение">
+            <a href="{% url 'catalog:home' %}">
+                        <button type="button" class="btn btn-primary btn-lg position-absolute bottom-0 start-0 mb-5 ms-5">на главную</button>
+                    </a>
         </div>
         <div class="col-md-8">
             <div class="card-body">

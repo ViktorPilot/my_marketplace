@@ -7,9 +7,11 @@ from catalog.models import Contact, Product
 def home(request: HttpRequest) -> HttpResponse:
     """Функция, рендерирующая страницу 'home' и отображающая в консоли пять крайних добавленных товаров"""
     last_prod = Product.objects.order_by("-id")[:5]
+    products = Product.objects.all()
+    context ={'products': products}
     for i in last_prod:
         print(f"Товар: {i.name}, создан: {i.created_at}")
-    return render(request, "catalog/home.html")
+    return render(request, "catalog/home.html", context)
 
 
 def contacts(request: HttpRequest) -> HttpResponse:
