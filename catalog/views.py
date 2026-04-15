@@ -31,3 +31,9 @@ def contacts_post(request: HttpRequest) -> HttpResponse:
         message = request.POST.get("message")
         return HttpResponse(f"Данные пользователя {name} ({phone, message}) успешно приняты)!")
     return render(request, "catalog/contacts.html")
+
+def product_detail(request: HttpRequest, pk: int) -> HttpResponse:
+    """Функция, рендерирующая страницу информации детальной информации о товаре"""
+    product = Product.objects.get(id=pk)
+    context = {'product': product}
+    return render(request, 'catalog/product_detail.html', context)
