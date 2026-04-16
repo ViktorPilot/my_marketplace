@@ -18,7 +18,7 @@
                 <h5 class="card-title">Товар: {{ product.name }}</h5>
                 <p class="card-text">Описание: {{ product.description | truncatechars:100 }}</p>
                 <a href="{% url 'catalog:product_detail' product.pk %}">
-                    <button type="button" class="btn btn-primary btn-sm">перейти</button>
+                    <button type="button" class="btn btn-primary btn-sm">Перейти</button>
                 </a>
             </div>
         </div>
