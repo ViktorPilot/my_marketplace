@@ -1,9 +1,12 @@
 {% extends 'catalog/base.html' %}
-{% load my_tags %}
 {% block title %}product_detail{% endblock %}
 {% block content %}
+{% include 'catalog/includes/include_menu.html' %}
 
-{% load my_tags %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">My marketplace</h1>
+    <p class="lead">My marketplace - это отличный вариант для покупки высококачественных товаров</p>
+</div>
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6 ">
@@ -15,7 +18,7 @@
             </div>
             <div class="col-md-6">
                 <label for="image" class="form-label">Изображение</label>
-                <input type="text" name="image" class="form-control" id="image">
+                <input type="text" name="image" class="form-control" id="image" placeholder="product/image/<name.jpg>">
             </div>
             <div class="col-12">
                 <label for="description" class="form-label">Описание</label>

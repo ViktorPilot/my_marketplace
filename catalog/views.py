@@ -1,14 +1,19 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404
-
+from django.core.paginator import Paginator
 from catalog.models import Contact, Product, Category
 
 
 def home(request: HttpRequest) -> HttpResponse:
-    """Функция, рендерирующая страницу 'home' и отображающая в консоли пять крайних добавленных товаров"""
+    """Функция, рендерирующая страницу 'home' и отображающая в консоль пять крайних добавленных товаров"""
     last_prod = Product.objects.order_by("-id")[:5]
     products = Product.objects.all()
-    context ={'products': products}
+
+    paginator = Paginator(products, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'page_obj': page_obj}
     for i in last_prod:
         print(f"Товар: {i.name}, создан: {i.created_at}")
     return render(request, "catalog/home.html", context)
@@ -34,11 +39,13 @@ def contacts_post(request: HttpRequest) -> HttpResponse:
         return HttpResponse(f"Данные пользователя {name} ({phone, message}) успешно приняты)!")
     return render(request, "catalog/contacts.html")
 
+
 def product_detail(request: HttpRequest, pk: int) -> HttpResponse:
     """Функция, рендерирующая страницу информации детальной информации о товаре"""
     product = get_object_or_404(Product, id=pk)
     context = {'product': product}
     return render(request, 'catalog/product_detail.html', context)
+
 
 def add_product(request: HttpRequest) -> HttpResponse:
     """Функция добавления товара в базу данных"""

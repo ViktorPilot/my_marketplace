@@ -2,7 +2,12 @@
 {% load my_tags %}
 {% block title %}product_detail{% endblock %}
 {% block content %}
-{% load my_tags %}
+{% include 'catalog/includes/include_menu.html' %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">My marketplace</h1>
+    <p class="lead">My marketplace - это отличный вариант для покупки высококачественных товаров</p>
+</div>
 <div class="row">
     <div class="col-12">
         <div class="card position-relative top-50 start-50 translate-middle" style="max-width: 1000px">
