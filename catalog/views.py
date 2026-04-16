@@ -1,7 +1,7 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-from catalog.models import Contact, Product
+from catalog.models import Contact, Product, Category
 
 
 def home(request: HttpRequest) -> HttpResponse:
@@ -36,6 +36,19 @@ def contacts_post(request: HttpRequest) -> HttpResponse:
 
 def product_detail(request: HttpRequest, pk: int) -> HttpResponse:
     """Функция, рендерирующая страницу информации детальной информации о товаре"""
-    product = Product.objects.get(id=pk)
+    product = get_object_or_404(Product, id=pk)
     context = {'product': product}
     return render(request, 'catalog/product_detail.html', context)
+
+def add_product(request: HttpRequest) -> HttpResponse:
+    """Функция добавления товара в базу данных"""
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        image = request.POST.get('image')
+        price = request.POST.get('price')
+        input_category = request.POST.get('category')
+        category = Category.objects.get_or_create(name=input_category)[0]
+        Product.objects.create(name=name, description=description, image=image, price=price, category=category)
+        return render(request, 'catalog/success_add_product.html')
+    return render(request, 'catalog/add_product.html')

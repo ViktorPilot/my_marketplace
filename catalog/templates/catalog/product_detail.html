@@ -1,57 +1,55 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Информация о товаре</title>
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
-
-</head>
-<body>
+{% extends 'catalog/base.html' %}
 {% load my_tags %}
-<div class="card mb-3 position-absolute top-50 start-50 translate-middle" style="max-width: 1000px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img src="{{ product.image | media_filter }}" class="card-img-top" alt="Изображение">
-            <a href="{% url 'catalog:home' %}">
-                        <button type="button" class="btn btn-primary btn-lg position-absolute bottom-0 start-0 mb-5 ms-5">на главную</button>
+{% block title %}product_detail{% endblock %}
+{% block content %}
+{% load my_tags %}
+<div class="row">
+    <div class="col-12">
+        <div class="card position-relative top-50 start-50 translate-middle" style="max-width: 1000px">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ product.image | media_filter }}" class="card-img-top h-75 d-inline-block"
+                         alt="Изображение">
+                    <a href="{% url 'catalog:home' %}">
+                        <button type="button" class="btn btn-primary btn-lg mt-3 ms-5">на
+                            главную
+                        </button>
                     </a>
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <th scope="row">Наименование товара:</th>
-                        <td class="fst-italic">{{ product.name }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Описание товара:</th>
-                        <td class="fst-italic">{{ product.description }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Категория товара:</th>
-                        <td class="fst-italic">{{ product.category }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Цена товара:</th>
-                        <td class="fst-italic">{{ product.price }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Дата создания товара:</th>
-                        <td class="fst-italic">{{ product.created_at }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Дата последнего изменения товара:</th>
-                        <td class="fst-italic">{{ product.updated_at }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th scope="row">Наименование товара:</th>
+                                <td class="fst-italic">{{ product.name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Описание товара:</th>
+                                <td class="fst-italic">{{ product.description }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Категория товара:</th>
+                                <td class="fst-italic">{{ product.category }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Цена товара:</th>
+                                <td class="fst-italic">{{ product.price }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Дата создания товара:</th>
+                                <td class="fst-italic">{{ product.created_at }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Дата последнего изменения товара:</th>
+                                <td class="fst-italic">{{ product.updated_at }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<script src="/static/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}
