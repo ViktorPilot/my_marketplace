@@ -5,11 +5,11 @@
     "fields": {
         "name": "ноутбук",
         "description": "для работы в сети",
-        "image": "",
+        "image": "product/image/laptop.jpg",
         "category": 1,
-        "price": "1000.00",
-        "created_at": "2026-04-08",
-        "updated_at": "2026-04-08"
+        "price": "100.00",
+        "created_at": "2026-04-15",
+        "updated_at": "2026-04-15"
     }
 },
 {
@@ -18,11 +18,11 @@
     "fields": {
         "name": "телевизор",
         "description": "для просмотра эфира",
-        "image": "",
+        "image": "product/image/TV.jpg",
         "category": 1,
-        "price": "400.00",
-        "created_at": "2026-04-08",
-        "updated_at": "2026-04-08"
+        "price": "80.00",
+        "created_at": "2026-04-15",
+        "updated_at": "2026-04-15"
     }
 },
 {
@@ -31,11 +31,11 @@
     "fields": {
         "name": "шкаф",
         "description": "для хранения вещей",
-        "image": "",
+        "image": "product/image/wardrobe.jpg",
         "category": 2,
-        "price": "200.00",
-        "created_at": "2026-04-08",
-        "updated_at": "2026-04-08"
+        "price": "50.00",
+        "created_at": "2026-04-15",
+        "updated_at": "2026-04-15"
     }
 },
 {
@@ -44,11 +44,11 @@
     "fields": {
         "name": "диван",
         "description": "для отдыха",
-        "image": "",
+        "image": "product/image/sofa.jpg",
         "category": 2,
-        "price": "300.00",
-        "created_at": "2026-04-08",
-        "updated_at": "2026-04-08"
+        "price": "60.00",
+        "created_at": "2026-04-15",
+        "updated_at": "2026-04-15"
     }
 },
 {
@@ -57,11 +57,11 @@
     "fields": {
         "name": "магнитофон",
         "description": "для прослушивания музыки",
-        "image": "",
+        "image": "product/image/pleer.jpg",
         "category": 1,
         "price": "50.00",
-        "created_at": "2026-04-09",
-        "updated_at": "2026-04-09"
+        "created_at": "2026-04-15",
+        "updated_at": "2026-04-15"
     }
 },
 {
@@ -70,11 +70,11 @@
     "fields": {
         "name": "холодильник",
         "description": "для хранения продуктов",
-        "image": "",
+        "image": "product/image/fredge.jpg",
         "category": 1,
-        "price": "150.00",
-        "created_at": "2026-04-09",
-        "updated_at": "2026-04-09"
+        "price": "70.00",
+        "created_at": "2026-04-15",
+        "updated_at": "2026-04-15"
     }
 },
 {
@@ -83,11 +83,11 @@
     "fields": {
         "name": "стиральная машина",
         "description": "для стирки белья",
-        "image": "",
+        "image": "product/image/washing.jpg",
         "category": 1,
-        "price": "200.00",
-        "created_at": "2026-04-09",
-        "updated_at": "2026-04-09"
+        "price": "90.00",
+        "created_at": "2026-04-15",
+        "updated_at": "2026-04-15"
     }
 },
 {
@@ -96,11 +96,11 @@
     "fields": {
         "name": "планшет",
         "description": "для работы",
-        "image": "",
+        "image": "product/image/ipad.jpg",
         "category": 1,
-        "price": "50.00",
-        "created_at": "2026-04-09",
-        "updated_at": "2026-04-09"
+        "price": "130.00",
+        "created_at": "2026-04-15",
+        "updated_at": "2026-04-15"
     }
 },
 {
