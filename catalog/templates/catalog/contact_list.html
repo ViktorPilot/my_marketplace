@@ -18,20 +18,20 @@
                     <table class="table table-striped">
                         <tr>
                             <td class="w-25">Название компании</td>
-                            {% for name in names %}
-                            <td>{{ name }}</td>
+                            {% for n in object_list %}
+                            <td>{{ n.name }}</td>
                             {% endfor %}
                         </tr>
                         <tr>
                             <td class="w-25">Почта</td>
-                            {% for email in emails %}
-                            <td>{{ email }}</td>
+                            {% for e in object_list %}
+                            <td>{{ e.email }}</td>
                             {% endfor %}
                         </tr>
                         <tr>
                             <td class="w-25">Телефон</td>
-                            {% for number in numbers %}
-                            <td>{{ number }}</td>
+                            {% for num in object_list %}
+                            <td>{{ num.number }}</td>
                             {% endfor %}
                         </tr>
                     </table>
@@ -44,7 +44,7 @@
                     <h4 class="my-0 font-weight-normal">Свяжитесь с нами</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="/contacts_post/" class="form-floating">
+                    <form method="post" class="form-floating">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="name">Имя</label>

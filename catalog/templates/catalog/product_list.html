@@ -9,7 +9,7 @@
     <p class="lead">My marketplace - это отличный вариант для покупки высококачественных товаров</p>
 </div>
 <div class="row row-cols-1 row-cols-md-3 g-4 mx-5">
-    {% for product in page_obj.object_list %}
+    {% for product in object_list %}
     <div class="col">
         <div class="card">
             <img src="{{ product.image | media_filter }}" class="img-thumbnail" style="height: 15rem"
@@ -28,12 +28,12 @@
 <div class="row ms-5 ps-3 mt-3">
     <div class="pagination">
         <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+            {% if object_list.has_previous %}
+                <a href="?page={{ object_list.previous_page_number }}">Назад</a>
             {% endif %}
-            <span class="current">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.</span>
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Вперед</a>
+            <span class="current">Страница {{ object_list.number }} из {{ object_list.paginator.num_pages }}.</span>
+            {% if object_list.has_next %}
+                <a href="?page={{ object_list.next_page_number }}">Вперед</a>
             {% endif %}
         </span>
     </div>
