@@ -1,8 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse_lazy
 from django.core.paginator import Paginator
-from django.http import HttpRequest, HttpResponse
-
+from django.http import HttpResponse
 
 from catalog.models import Category, Contact, Product
 
@@ -42,9 +41,11 @@ class ContactListView(ListView):
         self.queryset = super().get_queryset().order_by('id')[:3]
         return self.queryset
 
+
 class ProductDetailView(DetailView):
     """Класс объекта подробной информации о товаре"""
     model = Product
+
 
 class ProductCreateView(CreateView):
     """Класс объекта создания нового товара"""
@@ -59,4 +60,4 @@ class ProductCreateView(CreateView):
 
     def get_success_url(self):
         """Метод перенаправляет на страницу информации о созданном товаре"""
-        return reverse_lazy("catalog:product_detail", kwargs = {"pk": self.object.pk})
+        return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
