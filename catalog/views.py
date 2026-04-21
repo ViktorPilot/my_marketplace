@@ -7,7 +7,7 @@ from catalog.models import Category, Contact, Product
 
 
 class ProductListView(ListView):
-    """Класс объекта списка товаров"""
+    """Класс контроллера списка товаров"""
     model = Product
 
     def print_list_product(self):
@@ -26,7 +26,7 @@ class ProductListView(ListView):
 
 
 class ContactListView(ListView):
-    """Класс объекта списка контактов"""
+    """Класс контроллера списка контактов"""
     model = Contact
 
     def post(self, request):
@@ -43,12 +43,12 @@ class ContactListView(ListView):
 
 
 class ProductDetailView(DetailView):
-    """Класс объекта подробной информации о товаре"""
+    """Класс контроллера подробной информации о товаре"""
     model = Product
 
 
 class ProductCreateView(CreateView):
-    """Класс объекта создания нового товара"""
+    """Класс контроллера создания нового товара"""
     model = Product
     fields = ['name', 'description', 'image', 'price', 'category']
 
