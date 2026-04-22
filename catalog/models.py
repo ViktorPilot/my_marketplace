@@ -28,7 +28,7 @@ class Product(models.Model):
         return f"{self.name}"
 
     class Meta:
-        """Метакласс для класса товаров"""
+        """Класс метаданных для товаров"""
 
         verbose_name = "товар"
         verbose_name_plural = "товары"
@@ -49,7 +49,7 @@ class Category(models.Model):
         return f"{self.name}"
 
     class Meta:
-        """Метакласс для класса категорий товаров"""
+        """Класс метаданных для категорий товаров"""
 
         verbose_name = "категория"
         verbose_name_plural = "категории"
@@ -58,18 +58,18 @@ class Category(models.Model):
 
 
 class Contact(models.Model):
-    """Класс информации о категориях товаров"""
+    """Класс информации о контактах"""
 
     name = models.CharField(max_length=100, verbose_name="название компании")
     email = models.TextField(verbose_name="почта")
     number = models.TextField(verbose_name="номер телефона")
 
     def __str__(self) -> str:
-        """Магический метод, возвращающий название категории товара"""
+        """Магический метод, возвращающий имя контакта"""
         return f"{self.name}"
 
     class Meta:
-        """Метакласс для класса категорий товаров"""
+        """Класс метаданных для контактов"""
 
         verbose_name = "контакты"
         verbose_name_plural = "контакты"

@@ -13,7 +13,7 @@
         <div class="card position-relative top-50 start-50 translate-middle" style="max-width: 1000px">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="{{ product.image | media_filter }}" class="card-img-top h-75 d-inline-block"
+                    <img src="{{ object.image | media_filter }}" class="card-img-top h-75 d-inline-block"
                          alt="Изображение">
                     <a href="{% url 'catalog:home' %}">
                         <button type="button" class="btn btn-primary btn-lg mt-3 ms-5">На главную</button>
@@ -25,27 +25,27 @@
                             <tbody>
                             <tr>
                                 <th scope="row">Наименование товара:</th>
-                                <td class="fst-italic">{{ product.name }}</td>
+                                <td class="fst-italic">{{ object.name }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Описание товара:</th>
-                                <td class="fst-italic">{{ product.description }}</td>
+                                <td class="fst-italic">{{ object.description }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Категория товара:</th>
-                                <td class="fst-italic">{{ product.category }}</td>
+                                <td class="fst-italic">{{ object.category }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Цена товара:</th>
-                                <td class="fst-italic">{{ product.price }}</td>
+                                <td class="fst-italic">{{ object.price }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Дата создания товара:</th>
-                                <td class="fst-italic">{{ product.created_at }}</td>
+                                <td class="fst-italic">{{ object.created_at }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Дата последнего изменения товара:</th>
-                                <td class="fst-italic">{{ product.updated_at }}</td>
+                                <td class="fst-italic">{{ object.updated_at }}</td>
                             </tr>
                             </tbody>
                         </table>

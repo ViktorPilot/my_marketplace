@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{% load my_tags_blog %}
+{% block title %}blog_list{% endblock %}
+{% block content %}
+
+{% include 'blog/includes/include_menu.html' %}
+<div class="row row-cols-1 row-cols-md-4 g-4 mx-5 mt-3">
+    {% for object in object_list %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{ object.image | media_filter }}" class="img-thumbnail" style="height: 15rem" alt="Изображение">
+            <div class="card-body">
+                <h5 class="card-title">{{ object.title }}</h5>
+                <p class="card-text mb-0">{{ object.content | truncatechars:50 }}</p>
+                <a href="{% url 'blog:detail_blog' object.pk %}">
+                    <button type="button" class="btn btn-primary btn-sm mt-2">Перейти</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

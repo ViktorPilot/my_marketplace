@@ -26,11 +26,15 @@
             </div>
             <div class="col-md-6">
                 <label for="category" class="form-label">Категория</label>
-                <input type="text" name="category" class="form-control" id="category">
+                <select name="category" class="form-control" id="category">
+                    {% for cat in category %}
+                    <option value="{{ cat.pk }}">{{ cat.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="col-md-6">
                 <label for="price" class="form-label">Цена</label>
-                <input type="text" name="price" class="form-control" id="price" placeholder="XX.XX">
+                <input type="text" name="price" class="form-control" id="price" placeholder="xx.xx">
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Добавить</button>
@@ -39,5 +43,4 @@
     </div>
     <div class="col-3 "></div>
 </div>
-
 {% endblock %}

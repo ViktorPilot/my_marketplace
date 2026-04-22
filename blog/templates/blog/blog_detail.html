@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+{% load my_tags_blog %}
+{% block title %}blog_detail{% endblock %}
+{% block content %}
+
+{% include 'blog/includes/include_menu.html' %}
+<div class="row mx-5 mt-5">
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+        <div class="card h-100">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <img src="{{ object.image | media_filter }}" class="img-fluid rounded-start" style="height: 28rem"
+                         alt="Изображение">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ object.title }}</h5>
+                        <p class="card-text mb-0">{{ object.content | truncatechars:400 }}</p>
+                        <p class="card-text mb-0">Дата создания: {{ object.created_at }}</p>
+                        <p class="card-text mb-0">Признак публикации: {{ object.publication }}</p>
+                        <p class="card-text mb-0">Количество просмотров: {{ object.show_counted }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-success"><a href="{% url 'blog:home_blog' %}">
+                        <button type="button" class="btn btn-primary btn-sm mt-5">Главное меню</button>
+                    </a>
+                        <a href="{% url 'blog:update_blog' object.pk%}">
+                            <button type="button" class="btn btn-primary btn-sm mt-5">Редактировать</button>
+                        </a>
+                        <a href="{% url 'blog:delete_blog' object.pk%}">
+                            <button type="button" class="btn btn-danger btn-sm mt-5">Удалить</button>
+                        </a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-2">
+</div>
+{% endblock %}

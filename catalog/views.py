@@ -1,62 +1,70 @@
+from typing import Any
+
 from django.core.paginator import Paginator
+from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DetailView, ListView
 
 from catalog.models import Category, Contact, Product
 
 
-def home(request: HttpRequest) -> HttpResponse:
-    """Функция, рендерирующая страницу 'home' и отображающая в консоль пять крайних добавленных товаров"""
-    last_prod = Product.objects.order_by("-id")[:5]
-    products = Product.objects.all()
+class ProductListView(ListView):
+    """Класс контроллера списка товаров"""
 
-    paginator = Paginator(products, 3)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    model = Product
 
-    context = {"page_obj": page_obj}
-    for i in last_prod:
-        print(f"Товар: {i.name}, создан: {i.created_at}")
-    return render(request, "catalog/home.html", context)
+    def print_list_product(self) -> None:
+        """Метод выводит в консоль пять крайних добавленных товаров"""
+        for i in self.get_queryset().order_by("id").reverse()[:5]:
+            print(f"Товар: {i.name}, создан: {i.created_at}")
 
-
-def contacts(request: HttpRequest) -> HttpResponse:
-    """Функция, рендерирующая страницу 'contacts'"""
-    contact = Contact.objects.all()
-    context = {
-        "names": [i.name for i in contact][-3:],
-        "emails": [i.email for i in contact][-3:],
-        "numbers": [i.number for i in contact][-3:],
-    }
-    return render(request, "catalog/contacts.html", context=context)
+    def get_context_data(self, **kwargs: Any) -> dict:
+        """Метод добавляет пагинатор в контекст для постраничного просмотра товаров"""
+        context = super().get_context_data()
+        paginator = Paginator(self.get_queryset(), 3)
+        page_number = self.request.GET.get("page")
+        context["object_list"] = paginator.get_page(page_number)
+        self.print_list_product()
+        return context
 
 
-def contacts_post(request: HttpRequest) -> HttpResponse:
-    """Функция, рендерирующая ответ пользователю на его POST сообщение"""
-    if request.method == "POST":
+class ContactListView(ListView):
+    """Класс контроллера списка контактов"""
+
+    model = Contact
+
+    def post(self, request: HttpRequest) -> HttpResponse:
+        """Метод рендирующий ответ об успешном приеме контакта пользователя"""
         name = request.POST.get("name")
         phone = request.POST.get("phone")
         message = request.POST.get("message")
         return HttpResponse(f"Данные пользователя {name} ({phone, message}) успешно приняты)!")
-    return render(request, "catalog/contacts.html")
+
+    def get_queryset(self) -> QuerySet[Contact]:
+        """Метод выводит на страницу 'contact_list' три первых контакта из базы данных"""
+        self.queryset = super().get_queryset().order_by("id")[:3]
+        return self.queryset
 
 
-def product_detail(request: HttpRequest, pk: int) -> HttpResponse:
-    """Функция, рендерирующая страницу информации детальной информации о товаре"""
-    product = get_object_or_404(Product, id=pk)
-    context = {"product": product}
-    return render(request, "catalog/product_detail.html", context)
+class ProductDetailView(DetailView):
+    """Класс контроллера подробной информации о товаре"""
+
+    model = Product
 
 
-def add_product(request: HttpRequest) -> HttpResponse:
-    """Функция добавления товара в базу данных"""
-    if request.method == "POST":
-        name = request.POST.get("name")
-        description = request.POST.get("description")
-        image = request.POST.get("image")
-        price = request.POST.get("price")
-        input_category = request.POST.get("category")
-        category = Category.objects.get_or_create(name=input_category)[0]
-        Product.objects.create(name=name, description=description, image=image, price=price, category=category)
-        return render(request, "catalog/success_add_product.html")
-    return render(request, "catalog/add_product.html")
+class ProductCreateView(CreateView):
+    """Класс контроллера создания нового товара"""
+
+    model = Product
+    fields = ["name", "description", "image", "price", "category"]
+
+    def get_context_data(self, **kwargs: Any) -> dict:
+        """Метод добавляет список всех категорий из базы данных в контекст"""
+        context = super().get_context_data()
+        context["category"] = Category.objects.all()
+        return context
+
+    def get_success_url(self) -> str:
+        """Метод перенаправляет на страницу информации о созданном товаре"""
+        return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
