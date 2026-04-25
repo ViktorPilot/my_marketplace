@@ -10,36 +10,21 @@
 <div class="row">
     <div class="col-3 "></div>
     <div class="col-6 ">
-        <form class="row g-3" method="post">
-            {% csrf_token %}
-            <div class="col-md-6">
-                <label for="name" class="form-label">Название товара</label>
-                <input type="text" name="name" class="form-control" id="name">
+        <div class="card border-secondary text-bg-light mb-3 px-3">
+            <div class="card-body text-secondary">
+                <form class="row g-3" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {{ form.non_field_errors }}
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <a href="{% url 'catalog:home' %}">
+                            <button type="button" class="btn btn-primary ms-3">На главную</button>
+                        </a>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-6">
-                <label for="image" class="form-label">Изображение</label>
-                <input type="text" name="image" class="form-control" id="image" placeholder="product/image/<name.jpg>">
-            </div>
-            <div class="col-12">
-                <label for="description" class="form-label">Описание</label>
-                <input type="text" name="description" class="form-control" id="description">
-            </div>
-            <div class="col-md-6">
-                <label for="category" class="form-label">Категория</label>
-                <select name="category" class="form-control" id="category">
-                    {% for cat in category %}
-                    <option value="{{ cat.pk }}">{{ cat.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="price" class="form-label">Цена</label>
-                <input type="text" name="price" class="form-control" id="price" placeholder="xx.xx">
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Добавить</button>
-            </div>
-        </form>
+        </div>
     </div>
     <div class="col-3 "></div>
 </div>
