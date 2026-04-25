@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from catalog.forms import ProductForms
 from catalog.models import Category, Contact, Product
@@ -70,6 +70,7 @@ class ProductCreateView(CreateView):
         """Метод перенаправляет на страницу информации о созданном товаре"""
         return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
 
+
 class ProductUpdateView(UpdateView):
     """Класс контроллера создания нового товара"""
 
@@ -86,8 +87,9 @@ class ProductUpdateView(UpdateView):
         """Метод перенаправляет на страницу информации о созданном товаре"""
         return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
 
+
 class ProductDeleteView(DeleteView):
     """Класс контроллера создания нового товара"""
 
     model = Product
-    success_url = reverse_lazy('catalog:home')
+    success_url = reverse_lazy("catalog:home")

@@ -7,8 +7,9 @@ class Product(models.Model):
     name = models.CharField(
         max_length=100, verbose_name="наименование товара", help_text="Введите наименование товара"
     )
-    description = models.TextField(verbose_name="описание товара", blank=True, null=True,
-                                   help_text="Введите описание товара")
+    description = models.TextField(
+        verbose_name="описание товара", blank=True, null=True, help_text="Введите описание товара"
+    )
     image = models.ImageField(upload_to="product/image/", verbose_name="изображение товара", blank=True, null=True)
     category = models.ForeignKey(
         to="Category",
@@ -18,12 +19,20 @@ class Product(models.Model):
         null=True,
         related_name="product",
     )
-    price = models.DecimalField(verbose_name="цена товара", blank=True, null=True, max_digits=20, decimal_places=2,
-                                help_text="Введите цену товара", default=0)
+    price = models.DecimalField(
+        verbose_name="цена товара",
+        blank=True,
+        null=True,
+        max_digits=20,
+        decimal_places=2,
+        help_text="Введите цену товара",
+        default=0,
+    )
     created_at = models.DateField(auto_now_add=True, verbose_name="дата создания товара", blank=True, null=True)
     updated_at = models.DateField(
         auto_now=True, verbose_name="дата последнего изменения товара", blank=True, null=True
     )
+    is_active = models.BooleanField(verbose_name="является активным", default=True)
 
     def __str__(self) -> str:
         """Магический метод, возвращающий название товара"""
