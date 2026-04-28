@@ -4,8 +4,9 @@ from django.core.paginator import Paginator
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
+from catalog.forms import ProductForms
 from catalog.models import Category, Contact, Product
 
 
@@ -57,7 +58,7 @@ class ProductCreateView(CreateView):
     """Класс контроллера создания нового товара"""
 
     model = Product
-    fields = ["name", "description", "image", "price", "category"]
+    form_class = ProductForms
 
     def get_context_data(self, **kwargs: Any) -> dict:
         """Метод добавляет список всех категорий из базы данных в контекст"""
@@ -68,3 +69,27 @@ class ProductCreateView(CreateView):
     def get_success_url(self) -> str:
         """Метод перенаправляет на страницу информации о созданном товаре"""
         return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
+
+
+class ProductUpdateView(UpdateView):
+    """Класс контроллера создания нового товара"""
+
+    model = Product
+    form_class = ProductForms
+
+    def get_context_data(self, **kwargs: Any) -> dict:
+        """Метод добавляет список всех категорий из базы данных в контекст"""
+        context = super().get_context_data()
+        context["category"] = Category.objects.all()
+        return context
+
+    def get_success_url(self) -> str:
+        """Метод перенаправляет на страницу информации о созданном товаре"""
+        return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
+
+
+class ProductDeleteView(DeleteView):
+    """Класс контроллера создания нового товара"""
+
+    model = Product
+    success_url = reverse_lazy("catalog:home")

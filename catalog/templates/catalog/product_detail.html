@@ -16,7 +16,13 @@
                     <img src="{{ object.image | media_filter }}" class="card-img-top h-75 d-inline-block"
                          alt="Изображение">
                     <a href="{% url 'catalog:home' %}">
-                        <button type="button" class="btn btn-primary btn-lg mt-3 ms-5">На главную</button>
+                        <button type="button" class="btn btn-primary btn-sm mt-3 ms-2">На главную</button>
+                    </a>
+                    <a href="{% url 'catalog:update_product' object.pk %}">
+                        <button type="button" class="btn btn-primary btn-sm mt-3 ms-1">Редактировать</button>
+                    </a>
+                    <a href="{% url 'catalog:delete_product' object.pk %}">
+                        <button type="button" class="btn btn-danger btn-sm mt-3 ms-1">Удалить</button>
                     </a>
                 </div>
                 <div class="col-md-8">
