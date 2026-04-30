@@ -1,8 +1,17 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">my marketplace</h5>
     <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="/home/">Каталог</a>
-        <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
-        <a class="p-2 btn btn-outline-primary" href="/add_product/">Добавить товар</a>
+        <form method="post" action="{% url 'users:logout' %}">
+            <a class="p-2 btn btn-outline-primary" href="/home/">Каталог</a>
+            <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
+            <a class="p-2 btn btn-outline-primary" href="/add_product/">Добавить товар</a>
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+            <button type="submit" class="p-2 btn btn-outline-danger ms-5">Выйти</button>
+            {% else %}
+            <a class="p-2 btn btn-outline-primary ms-5" href="{% url 'users:register' %}">Зарегистрироваться</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+            {% endif %}
+        </form>
     </nav>
 </div>
