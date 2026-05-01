@@ -46,4 +46,4 @@ class UserModelForm(StyleMixin, forms.ModelForm):
         """Класс метаданных для формы обновления информации о пользователе"""
 
         model = CustomUser
-        fields = ["email", "avatar", "phone_number", "country"]
+        fields = ("email", "avatar", "phone_number", "country")
