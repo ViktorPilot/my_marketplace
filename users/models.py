@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class CustomUser(AbstractUser):
+    """Класс информации о пользователе"""
     username = None
     email = models.EmailField(verbose_name='email', unique=True)
     avatar = models.ImageField(verbose_name='аватар', upload_to='users/image/', blank=True, null=True)
@@ -13,5 +14,5 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
+        """Магический метод, возвращающий электронную почту пользователя"""
         return self.email
-

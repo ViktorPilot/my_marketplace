@@ -4,7 +4,9 @@ from django import forms
 
 
 class StyleMixin:
+    """Миксин создающий экземпляр класса для стилизации web-страницы"""
     def __init__(self, *args, **kwargs):
+        """Метод задает стиль web-страниц"""
         super().__init__(*args, **kwargs)
         for field in self.fields:
             if field != 'phone_number':
@@ -14,18 +16,22 @@ class StyleMixin:
 
 
 class CustomCreationForm(StyleMixin, UserCreationForm):
-
+    """Класс формы для создания нового пользователя"""
     class Meta(UserCreationForm.Meta):
+        """Класс метаданных для формы создания нового пользователя"""
         model = CustomUser
         fields = ['email', 'password1', 'password2']
 
 class UserAuthenticationForm(StyleMixin, AuthenticationForm):
-
+    """Класс формы для аутентификации пользователя"""
     class Meta(UserCreationForm.Meta):
+        """Класс метаданных для формы аутентификации пользователя"""
         model = CustomUser
         fields = ['email', 'password']
 
 class UserModelForm(StyleMixin, forms.ModelForm):
+    """Класс формы для обновления информации о пользователе"""
     class Meta:
+        """Класс метаданных для формы обновления информации о пользователе"""
         model = CustomUser
         fields = ['email', 'avatar', 'phone_number', 'country']

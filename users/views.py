@@ -9,11 +9,13 @@ from django.core.mail import send_mail
 from django.views.generic import UpdateView
 
 class RegisterView(CreateView):
+    """Класс контроллера создания нового пользователя"""
     model = CustomUser
     form_class = CustomCreationForm
     success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
+        """Метод, отправляющий приветственное письмо пользователю после успешной регистрации"""
         user = form.save()
         subject = 'Приветствие от MyMarketplace!'
         message = f'Вы успешно зарегистрировались на сайте MyMarketplace!'
@@ -21,11 +23,13 @@ class RegisterView(CreateView):
         return super().form_valid(form)
 
 class CustomLoginView(LoginView):
+    """Класс контроллера входа пользователя в аккаунт"""
     model = CustomUser
     form_class = UserAuthenticationForm
     template_name = 'users/login.html'
 
 class UserUpdateView(UpdateView):
+    """Класс контроллера выхода пользователя из аккаунта"""
     model = CustomUser
     form_class = UserModelForm
     success_url = reverse_lazy('catalog:home')

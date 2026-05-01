@@ -18,7 +18,6 @@
                 <form class="row g-3" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    {{ form.non_field_errors }}
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Войти</button>
                     </div>
