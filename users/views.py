@@ -2,11 +2,11 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 
 from config.settings import EMAIL_HOST_USER
-from users.forms import CustomCreationForm, UserAuthenticationForm
+from users.forms import CustomCreationForm, UserAuthenticationForm, UserModelForm
 from users.models import CustomUser
 from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail
-
+from django.views.generic import UpdateView
 
 class RegisterView(CreateView):
     model = CustomUser
@@ -24,3 +24,9 @@ class CustomLoginView(LoginView):
     model = CustomUser
     form_class = UserAuthenticationForm
     template_name = 'users/login.html'
+
+class UserUpdateView(UpdateView):
+    model = CustomUser
+    form_class = UserModelForm
+    success_url = reverse_lazy('catalog:home')
+    template_name = 'users/update_form.html'
