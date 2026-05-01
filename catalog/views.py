@@ -1,11 +1,12 @@
 from typing import Any
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 from catalog.forms import ProductForms
 from catalog.models import Category, Contact, Product
 

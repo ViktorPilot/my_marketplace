@@ -102,10 +102,10 @@ MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = "users.CustomUser"
 
-LOGIN_REDIRECT_URL = 'catalog:home'
+LOGIN_REDIRECT_URL = "catalog:home"
 
-LOGOUT_REDIRECT_URL = 'users:login'
+LOGOUT_REDIRECT_URL = "users:login"
 
-LOGIN_URL = 'users:login'
+LOGIN_URL = "users:login"
