@@ -3,6 +3,26 @@
     <nav class="ms-5">
         <a class="p-2 btn btn-outline-primary" href="/home/">Каталог</a>
         <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
-        <a class="p-2 btn btn-outline-primary" href="/add_product/">Добавить товар</a>
+        <a class="p-2 btn btn-outline-primary me-5" href="/add_product/">Добавить товар</a>
     </nav>
+    <form class='d-flex' method="post" action="{% url 'users:logout' %}">
+        <div class="nav-item p-2 dropdown btn btn-outline-secondary ms-5">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">Профиль пользователя</a>
+            <ul class="dropdown-menu">
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                <li><a class="p-2 btn btn-light" href="{% url 'users:update' user.pk %}">Редактировать
+                    профиль</a></li>
+                <li>
+                    <button type="submit" class="p-2 btn btn-light w-100">Выйти</button>
+                </li>
+                {% else %}
+                <li><a class="p-2 btn btn-light"
+                       href="{% url 'users:register' %}">Зарегистрироваться</a></li>
+                <li><a class="p-2 btn btn-light w-100" href="{% url 'users:login' %}">Войти</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </form>
 </div>

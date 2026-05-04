@@ -1,5 +1,6 @@
 from typing import Any
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
@@ -30,7 +31,7 @@ class ProductListView(ListView):
         return context
 
 
-class ContactListView(ListView):
+class ContactListView(LoginRequiredMixin, ListView):
     """Класс контроллера списка контактов"""
 
     model = Contact
@@ -48,13 +49,13 @@ class ContactListView(ListView):
         return self.queryset
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     """Класс контроллера подробной информации о товаре"""
 
     model = Product
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     """Класс контроллера создания нового товара"""
 
     model = Product
@@ -71,7 +72,7 @@ class ProductCreateView(CreateView):
         return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     """Класс контроллера создания нового товара"""
 
     model = Product
@@ -88,7 +89,7 @@ class ProductUpdateView(UpdateView):
         return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     """Класс контроллера создания нового товара"""
 
     model = Product
