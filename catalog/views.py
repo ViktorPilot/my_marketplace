@@ -1,14 +1,15 @@
 from typing import Any
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
-
+from django.core.exceptions import PermissionDenied
 from catalog.forms import ProductForms
 from catalog.models import Category, Contact, Product
+from users.models import CustomUser
 
 
 class ProductListView(ListView):
@@ -30,6 +31,9 @@ class ProductListView(ListView):
         self.print_list_product()
         return context
 
+    def get_queryset(self) -> QuerySet[Product]:
+        """Метод отфильтровывает вывод товаров на главную страницу по заданному статусу публикации True"""
+        return Product.objects.filter(status=True)
 
 class ContactListView(LoginRequiredMixin, ListView):
     """Класс контроллера списка контактов"""
@@ -71,6 +75,14 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         """Метод перенаправляет на страницу информации о созданном товаре"""
         return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
 
+    def form_valid(self, form):
+        status = form.cleaned_data['status']
+        user = self.request.user
+        form.instance.owner = user
+        if not user.has_perm('catalog.can_unpublish_product') and status:
+            raise PermissionDenied
+        return super().form_valid(form)
+
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     """Класс контроллера создания нового товара"""
@@ -89,8 +101,9 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     """Класс контроллера создания нового товара"""
 
     model = Product
     success_url = reverse_lazy("catalog:home")
+    permission_required = 'catalog.delete_product'

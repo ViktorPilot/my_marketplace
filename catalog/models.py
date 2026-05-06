@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import CustomUser
+
 
 class Product(models.Model):
     """Класс информации о товарах"""
@@ -32,7 +34,8 @@ class Product(models.Model):
     updated_at = models.DateField(
         auto_now=True, verbose_name="дата последнего изменения товара", blank=True, null=True
     )
-    is_active = models.BooleanField(verbose_name="является активным", default=True)
+    status = models.BooleanField(verbose_name="статус публикации", default=False)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='product')
 
     def __str__(self) -> str:
         """Магический метод, возвращающий название товара"""
@@ -45,7 +48,9 @@ class Product(models.Model):
         verbose_name_plural = "товары"
         ordering = ["id"]
         db_table = "products"
-
+        permissions = [
+            ('can_unpublish_product', 'Can unpublish product'),
+        ]
 
 class Category(models.Model):
     """Класс информации о категориях товаров"""
