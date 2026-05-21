@@ -1,5 +1,6 @@
-from django.core.management import BaseCommand, call_command
 from django.contrib.auth.models import Group
+from django.core.management import BaseCommand, call_command
+
 
 class Command(BaseCommand):
     def handle(self, *args: str, **kwargs: dict) -> None:

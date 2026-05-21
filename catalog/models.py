@@ -35,7 +35,7 @@ class Product(models.Model):
         auto_now=True, verbose_name="дата последнего изменения товара", blank=True, null=True
     )
     status = models.BooleanField(verbose_name="статус публикации", default=False)
-    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='product')
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="product")
 
     def __str__(self) -> str:
         """Магический метод, возвращающий название товара"""
@@ -49,8 +49,9 @@ class Product(models.Model):
         ordering = ["id"]
         db_table = "products"
         permissions = [
-            ('can_unpublish_product', 'Can unpublish product'),
+            ("can_unpublish_product", "Can unpublish product"),
         ]
+
 
 class Category(models.Model):
     """Класс информации о категориях товаров"""
