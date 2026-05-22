@@ -18,6 +18,7 @@ class ProductForms(forms.ModelForm):
         exclude = [
             "created_at",
             "updated_at",
+            "owner",
         ]
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
@@ -25,7 +26,7 @@ class ProductForms(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs.update({"class": "form-control", "rows": "3"})
-        self.fields["is_active"].widget.attrs.update(
+        self.fields["status"].widget.attrs.update(
             {"class": "btn-group", "role": "group", "aria-label": "Basic radio toggle button group"}
         )
 

@@ -18,12 +18,14 @@
                     <a href="{% url 'catalog:home' %}">
                         <button type="button" class="btn btn-primary btn-sm mt-3 ms-2">На главную</button>
                     </a>
-                    <a href="{% url 'catalog:update_product' object.pk %}">
-                        <button type="button" class="btn btn-primary btn-sm mt-3 ms-1">Редактировать</button>
-                    </a>
-                    <a href="{% url 'catalog:delete_product' object.pk %}">
-                        <button type="button" class="btn btn-danger btn-sm mt-3 ms-1">Удалить</button>
-                    </a>
+                    {% if product.owner == request.user or "moderators" in user_groups %}:
+                        <a href="{% url 'catalog:update_product' object.pk %}">
+                            <button type="button" class="btn btn-primary btn-sm mt-3 ms-1">Редактировать</button>
+                        </a>
+                        <a href="{% url 'catalog:delete_product' object.pk %}">
+                            <button type="button" class="btn btn-danger btn-sm mt-3 ms-1">Удалить</button>
+                        </a>
+                    {% endif %}
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
