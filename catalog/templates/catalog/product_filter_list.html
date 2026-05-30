@@ -1,0 +1,41 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block title %}home{% endblock %}
+{% block content %}
+{% include 'catalog/includes/include_menu.html' %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">My marketplace</h1>
+    <p class="lead">My marketplace - это отличный вариант для покупки высококачественных товаров</p>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4 mx-5">
+    {% for product in object_list %}
+    <div class="col">
+        <div class="card">
+            <img src="{{ product.image | media_filter }}" class="img-thumbnail" style="height: 15rem"
+                 alt="Изображение">
+            <div class="card-body">
+                <h5 class="card-title">Товар: {{ product.name }}</h5>
+                <p class="card-text">Описание: {{ product.description | truncatechars:100 }}</p>
+                <a href="{% url 'catalog:product_detail' product.pk %}">
+                    <button type="button" class="btn btn-primary btn-sm">Перейти</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="row ms-5 ps-3 mt-3">
+    <div class="pagination">
+        <span class="step-links">
+            {% if object_list.has_previous %}
+                <a href="?page={{ object_list.previous_page_number }}">Назад</a>
+            {% endif %}
+            <span class="current">Страница {{ object_list.number }} из {{ object_list.paginator.num_pages }}.</span>
+            {% if object_list.has_next %}
+                <a href="?page={{ object_list.next_page_number }}">Вперед</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}

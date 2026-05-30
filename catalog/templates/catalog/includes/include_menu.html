@@ -1,7 +1,17 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">my marketplace</h5>
     <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="/home/">Каталог</a>
+
+        <div class="nav-item p-2 dropdown btn btn-outline-danger ms-5">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">Каталог</a>
+            <ul class="dropdown-menu">
+                <li><a class="p-2 btn btn-light w-100" href="/home/">Все товары</a></li>
+                <li><a class="p-2 btn btn-light w-100" href="/home_filter/1/">Электроника</a></li>
+                <li><a class="p-2 btn btn-light w-100" href="/home_filter/2/">Мебель</a></li>
+            </ul>
+        </div>
+
         <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
         <a class="p-2 btn btn-outline-primary me-5" href="/add_product/">Добавить товар</a>
     </nav>

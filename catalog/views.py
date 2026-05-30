@@ -2,6 +2,7 @@ from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Permission
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.db.models import QuerySet
@@ -11,6 +12,8 @@ from django.views.generic import CreateView, DeleteView, DetailView, ListView, U
 
 from catalog.forms import ProductForms
 from catalog.models import Category, Contact, Product
+from catalog.services import get_category_products
+from config.settings import CACHE_ENABLE
 
 
 class ProductListView(ListView):
@@ -33,8 +36,20 @@ class ProductListView(ListView):
         return context
 
     def get_queryset(self) -> QuerySet[Product]:
-        """Метод отфильтровывает вывод товаров на главную страницу по заданному статусу публикации True"""
-        return Product.objects.filter(status=True)
+        """Метод отфильтровывает вывод товаров на главную страницу по заданному статусу публикации True,
+        а также добавляет и извлекает из кэша главную страницу"""
+        key = "list_products"
+        cache_data = cache.get(key)
+
+        if not CACHE_ENABLE:
+            return Product.objects.filter(status=True)
+
+        if cache_data is not None:
+            return cache_data
+
+        products_list = Product.objects.filter(status=True)
+        cache.set(key, products_list, 60)
+        return products_list
 
 
 class ContactListView(LoginRequiredMixin, ListView):
@@ -136,3 +151,25 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
             user.user_permissions.add(delete_product)
             return super().post(request, *args, **kwargs)
         raise PermissionDenied
+
+
+class ProductFilterListView(ListView):
+    """Класс контроллера списка товаров, отфильтрованных по категории"""
+
+    model = Product
+    template_name = "product_filter_list"
+
+    def get_context_data(self, **kwargs: Any) -> dict:
+        """Метод добавляет пагинатор в контекст для постраничного просмотра отфильтрованных товаров"""
+        context = super().get_context_data()
+        paginator = Paginator(self.get_queryset(), 3)
+        page_number = self.request.GET.get("page")
+        context["object_list"] = paginator.get_page(page_number)
+        return context
+
+    def get_queryset(self) -> QuerySet[Product]:
+        """Метод отфильтровывает вывод товаров на главную страницу
+        по заданному статусу публикации True и заданной категории"""
+        category_id = self.kwargs["category_id"]
+        product_filter = get_category_products(category_id)
+        return product_filter.filter(status=True)
